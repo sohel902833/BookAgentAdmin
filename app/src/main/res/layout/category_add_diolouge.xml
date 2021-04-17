@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="25dp"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/utiliti_diolouge_ImageViewid"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/select_image"
+            />
+        <EditText
+            android:id="@+id/utiliti_diolouge_CategoryNameEdittextid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:layout_below="@+id/utiliti_diolouge_ImageViewid"
+            android:padding="15dp"
+            android:layout_marginTop="15dp"
+            android:hint="Enter Category Name"
+            android:textColorHint="#000"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            />
+            <Button
+                android:background="@color/purple_500"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/categorySaveButtonid"
+                android:layout_below="@+id/utiliti_diolouge_CategoryNameEdittextid"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:text="Save Category"
+                android:padding="10dp"
+                />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
