@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "584203772002",
+    "project_id": "bookmanagement-e75d1",
+    "storage_bucket": "bookmanagement-e75d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584203772002:android:e7cf5937b543cfd0f4b13b",
+        "android_client_info": {
+          "package_name": "com.sohel.bookagentadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584203772002-h2q8rt65m26b7nebcvoeroh0cicj90v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm-qrxVLcAymobpiU0t_6qp1m_iii0ZZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584203772002-h2q8rt65m26b7nebcvoeroh0cicj90v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
