@@ -9,23 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookAgentAdmin">
-        <activity android:name=".Admin.AgentListActivity"></activity>
+        <activity android:name=".Admin.GenerateTokenActivity"></activity>
+        <activity android:name=".Agent.AgentMainActivity" />
+        <activity android:name=".Admin.AgentListActivity" />
         <activity android:name=".Admin.CreateAgentActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Agent.UserListActivity" />
         <activity android:name=".Agent.ChatingActivity" />
         <activity android:name=".Admin.BooksReadActivity" />
         <activity android:name=".Admin.BookListActivity" />
-        <activity android:name=".Admin.BookCategoryActivity">
-
-        </activity>
+        <activity android:name=".Admin.BookCategoryActivity" />
         <activity android:name=".Admin.BooksCreateActivity" />
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

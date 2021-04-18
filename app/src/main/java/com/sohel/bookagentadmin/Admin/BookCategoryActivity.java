@@ -66,6 +66,7 @@ public class BookCategoryActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    private boolean isImageSelected=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -383,11 +384,12 @@ public class BookCategoryActivity extends AppCompatActivity {
     }
 
     private void openfilechooser() {
-        Intent intentf=new Intent();
-        intentf.setType("image/*");
-        intentf.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intentf,1);
-    }
+            Intent intentf=new Intent();
+            intentf.setType("image/*");
+            intentf.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intentf,1);
+        }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -395,6 +397,7 @@ public class BookCategoryActivity extends AppCompatActivity {
         if(requestCode==1 && resultCode==RESULT_OK && data.getData()!=null){
             imageUri=data.getData();
             categoryImageView.setImageURI(data.getData());
+
         }
 
     }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,7 +68,9 @@ public class BookListActivity extends AppCompatActivity {
         addBookButton=findViewById(R.id.addBookButtonid);
 
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 
         bookListAdapter=new BookListAdapter(this,bookDataList);
         recyclerView.setAdapter(bookListAdapter);

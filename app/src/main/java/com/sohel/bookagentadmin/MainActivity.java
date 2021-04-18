@@ -28,23 +28,39 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.sohel.bookagentadmin.Admin.AgentListActivity;
 import com.sohel.bookagentadmin.Admin.BookCategoryActivity;
+import com.sohel.bookagentadmin.LocalDatabase.UserShared;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView booksCard,agentsCard,usercard,logoutCard;
 
+    private CircleImageView profileImage;
+    private  TextView nameTv,emailTv;
+
+        UserShared userShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        userShared=new UserShared(this);
+
         booksCard=findViewById(R.id.booksCard);
         agentsCard=findViewById(R.id.agentsCard);
-        usercard=findViewById(R.id.agentsCard);
+        usercard=findViewById(R.id.userCards);
         logoutCard=findViewById(R.id.logoutCard);
+        profileImage=findViewById(R.id.profileImage);
+        nameTv=findViewById(R.id.nameTv);
+        emailTv=findViewById(R.id.emailTv);
+
+
+        emailTv.setText(userShared.getUserPhone());
+
 
 
 
@@ -59,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, AgentListActivity.class));
-
             }
         });
 

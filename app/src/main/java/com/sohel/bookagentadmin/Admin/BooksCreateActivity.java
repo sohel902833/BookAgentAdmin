@@ -55,7 +55,7 @@ public class BooksCreateActivity extends AppCompatActivity {
 
 
     private ProgressDialog progressDialog;
-
+    private  boolean isImageSelected=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,10 +97,15 @@ public class BooksCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //open file manager for choose book all images
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                startActivityForResult(intent, PICK_IMAGE);
+                if(!isImageSelected) {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    startActivityForResult(intent, PICK_IMAGE);
+                }
+                else{
+                    Toast.makeText(BooksCreateActivity.this, "Image Already Selected", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -137,7 +142,7 @@ public class BooksCreateActivity extends AppCompatActivity {
 
                         progressDialog.setMessage("Uploaded "+(finalI+1)+"/"+imageList.size());
 
-                        ImageModel imageModel = new ImageModel(downloaduri.toString(), String.valueOf(finalI));
+                        ImageModel imageModel = new ImageModel(downloaduri.toString());
                         imageArrayList.add(imageModel);
 
                         if(finalI==imageList.size()-1){
@@ -161,7 +166,6 @@ public class BooksCreateActivity extends AppCompatActivity {
         String bookId=databaseReference.push().getKey()+System.currentTimeMillis();
         BookModel book=new BookModel(bookName,bookId,categoryId,imageArrayList);
 
-
         databaseReference.child(bookId)
                 .setValue(book)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -175,13 +179,8 @@ public class BooksCreateActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
                         Toasty.warning(BooksCreateActivity.this, "Book Upload Failed", Toast.LENGTH_SHORT, true).show();
-
                     }
                 });
-
-
-
-
     }
 
     @Override
@@ -199,10 +198,13 @@ public class BooksCreateActivity extends AppCompatActivity {
                         imageList.add(imageUri);
                         currentImageSlect = currentImageSlect + 1;
                     }
+                    imageView.setImageURI(Uri.parse(imageList.get(0).toString()));
+                    isImageSelected=true;
+                    choseImage.setText(imageList.size()+" Image Selected.");
+
                 } else {
                     Toast.makeText(this, "Please Select Multiple Images", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }
     }

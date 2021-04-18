@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sohel.bookagentadmin.Admin.Model.BookCategory;
 import com.sohel.bookagentadmin.Admin.Model.ImageModel;
+import com.sohel.bookagentadmin.Admin.Model.ImageModel2;
 import com.sohel.bookagentadmin.R;
 import com.squareup.picasso.Picasso;
 
@@ -24,11 +25,11 @@ import java.util.List;
 public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.MyViewHolder>{
 
     private Context context;
-    private List<ImageModel> imageModelList;
+    private List<ImageModel2> imageModelList;
     private  OnItemClickListner listner;
     private  String checker="null";
 
-    public ReadBookAdapter(Context context, List<ImageModel> imageModelList) {
+    public ReadBookAdapter(Context context, List<ImageModel2> imageModelList) {
         this.context = context;
         this.imageModelList = imageModelList;
     }
@@ -44,7 +45,7 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        ImageModel currentItem=imageModelList.get(position);
+        ImageModel2 currentItem=imageModelList.get(position);
 
         Picasso.get().load(currentItem.getImageUrl()).placeholder(R.drawable.select_image).into(holder.imageView);
 
@@ -57,7 +58,6 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.MyView
             @Override
             public void onClick(View v) {
                 if(listner!=null){
-
                     if(position!= RecyclerView.NO_POSITION){
                         listner.onDelete(position);
                     }

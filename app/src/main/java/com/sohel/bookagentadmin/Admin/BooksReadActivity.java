@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sohel.bookagentadmin.Admin.Adapter.ReadBookAdapter;
 import com.sohel.bookagentadmin.Admin.Model.BookModel;
 import com.sohel.bookagentadmin.Admin.Model.ImageModel;
+import com.sohel.bookagentadmin.Admin.Model.ImageModel2;
 import com.sohel.bookagentadmin.R;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class BooksReadActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private List<ImageModel> imageDataList=new ArrayList<>();
+    private List<ImageModel2> imageDataList=new ArrayList<>();
 
     private Toolbar toolbar;
     private  ProgressDialog progressBar;
@@ -70,6 +71,23 @@ public class BooksReadActivity extends AppCompatActivity {
         recyclerView.setAdapter(readBookAdapter);
 
 
+        readBookAdapter.setOnItemClickListner(new ReadBookAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+            @Override
+            public void onDelete(int position) {
+
+                Toast.makeText(BooksReadActivity.this, ""+position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void currentItem(int position) {
+
+            }
+        });
+
 
 
 
@@ -91,7 +109,7 @@ public class BooksReadActivity extends AppCompatActivity {
                                       String imageUrl=snapshot1.child("imageUrl").getValue().toString();
                                       String id=snapshot1.getKey();
 
-                                      ImageModel img=new ImageModel(imageUrl,id);
+                                      ImageModel2 img=new ImageModel2(imageUrl,id);
                                       imageDataList.add(img);
                                       readBookAdapter.notifyDataSetChanged();
 

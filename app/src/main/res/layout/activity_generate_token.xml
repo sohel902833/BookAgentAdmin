@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.GenerateTokenActivity">
+
+
+    <include
+        layout="@layout/app_ber_layout"
+        android:id="@+id/generate_token_AppBarid"
+        />
+
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_below="@+id/generate_token_AppBarid"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Generate New Token:"
+        />
+
+    <Spinner
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectDateSpinnerId"
+        />
+     <Button
+         android:id="@+id/keyGenerateButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+         android:background="@drawable/input"
+         android:layout_gravity="center_horizontal"
+         android:text="Generate"
+         android:textAllCaps="false"
+         android:textSize="18sp"
+        android:minWidth="120dp"
+             />
+        <TextView
+            android:id="@+id/generatedTextViewid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textAlignment="center"
+            android:text="Text here"
+            android:textSize="16sp"
+            android:textColor="#000"
+
+            />
+
+
+    </LinearLayout>
+</RelativeLayout>
