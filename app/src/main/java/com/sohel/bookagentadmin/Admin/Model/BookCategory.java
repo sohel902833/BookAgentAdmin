@@ -3,16 +3,16 @@ package com.sohel.bookagentadmin.Admin.Model;
 public class BookCategory {
     String categoryName;
     String image;
-    String id;
+    String categoryId;
 
     public BookCategory(){
 
     }
 
-    public BookCategory(String categoryName, String image, String id) {
+    public BookCategory(String categoryName, String image, String categoryId) {
         this.categoryName = categoryName;
         this.image = image;
-        this.id = id;
+        this.categoryId = categoryId;
     }
 
 
@@ -33,10 +33,10 @@ public class BookCategory {
     }
 
     public String getId() {
-        return id;
+        return categoryId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

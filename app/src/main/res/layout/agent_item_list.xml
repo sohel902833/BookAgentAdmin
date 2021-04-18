@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/agent_profile"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/avatar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/agent_profile"
+        android:id="@+id/agentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Sample Name"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+/>
+
+    <TextView
+        android:layout_below="@+id/agentName"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/agent_profile"
+        android:id="@+id/agentPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap to chat"
+        android:textSize="16sp"
+ />
+
+    <TextView
+
+        android:layout_below="@+id/agentPhone"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/agent_profile"
+        android:id="@+id/agentPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_marginEnd="8dp"
+        android:text="Password: "
+        android:textSize="16sp"
+    />
+
+    <View
+        android:layout_alignParentBottom="true"
+       android:layout_below="@+id/agentPassword"
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#675E5E"
+        android:layout_marginBottom="10dp"
+       />
+
+</RelativeLayout>

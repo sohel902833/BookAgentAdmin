@@ -111,17 +111,16 @@ public class BookCategoryActivity extends AppCompatActivity {
         categoryAdapter.setOnItemClickListner(new BookCategoryAdapter.OnItemClickListner() {
             @Override
             public void onItemClick(int position) {
-               /* Category category=categoryList.get(position);
-                Intent intent=new Intent(AdminUtilitiesCategory.this,UtilitiesListActivity.class);
-                intent.putExtra("categoryId",category.getCategoryId());
+                BookCategory category=bookCategoryList.get(position);
+                Intent intent=new Intent(BookCategoryActivity.this,BookListActivity.class);
+                intent.putExtra("category",category.getId());
                 intent.putExtra("categoryName",category.getCategoryName());
                 startActivity(intent);
-*/
             }
 
             @Override
             public void onDelete(int position) {
-
+                deleteCategory(bookCategoryList.get(position).getId());
             }
 
             @Override
@@ -284,14 +283,15 @@ public class BookCategoryActivity extends AppCompatActivity {
 
                 String categoryId=key+System.currentTimeMillis()+System.currentTimeMillis();
 
-                HashMap<String,String> categoryMap=new HashMap<>();
+              /*  HashMap<String,String> categoryMap=new HashMap<>();
                 categoryMap.put("categoryName",categoryName);
                 categoryMap.put("categoryId",categoryId);
                 categoryMap.put("image",downloaduri.toString());
-
+*/
+                BookCategory category=new BookCategory(categoryName,downloaduri.toString(),categoryId);
 
                 categoryRef.child(categoryId)
-                        .setValue(categoryMap)
+                        .setValue(category)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
