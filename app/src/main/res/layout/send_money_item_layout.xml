@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="10dp"
+    android:layout_marginBottom="15dp"
+    >
+    <RelativeLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <TextView
+        android:id="@+id/s_money_SerialTextViewid"
+        android:layout_centerVertical="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_bg"
+        android:textColor="#fff"
+        android:text="1"
+        android:textAlignment="center"
+        android:textSize="22sp"
+       android:paddingTop="12dp"
+        />
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/s_money_SerialTextViewid"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_money_FromTextViewid"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:text="Md Sohrab Hossain Sohel"
+            android:textIsSelectable="true"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_money_ToTextViewid"
+            android:textSize="18sp"
+            android:textColor="#ff22"
+            android:textStyle="bold"
+            android:text="To: Md Doyal Babu"
+            android:textIsSelectable="true"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_money_BalanceTextViewid"
+            android:textSize="18sp"
+            android:textColor="#ff22"
+            android:textStyle="bold"
+            android:text="400"
+            android:textIsSelectable="true"
+            />   <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_money_AgentNewBalanceTextviewid"
+            android:textSize="18sp"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
+            android:text="400"
+            android:textIsSelectable="true"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_money_admin_NewBalance"
+            android:textSize="18sp"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
+            android:text="Admin New: 400"
+            android:textIsSelectable="true"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_money_DateTimeTv"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text=""
+            android:textIsSelectable="true"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -11,24 +11,44 @@
         android:id="@+id/category_AppBarId"
         />
 
+    <LinearLayout
+        android:padding="20dp"
+        android:id="@+id/ln1"
+        android:layout_below="@+id/category_AppBarId"
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:padding="7dp"
+           android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yearSelectId"
+            />
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_marginLeft="14dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn"
+            android:text="Search"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            />
+
+    </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/category_AppBarId"
+        android:layout_below="@+id/ln1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/bookCategoryRecyclerViewid"
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addBookCategoryButtonid"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="25dp"
-        android:src="@drawable/add_icon"
-        android:backgroundTint="@color/purple_500"
         />
 
 </RelativeLayout>

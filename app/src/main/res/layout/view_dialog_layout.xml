@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.jsibbold.zoomage.ZoomageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ad"
+            android:id="@+id/viewImageViewid"
+            />
+        <ImageButton
+            android:id="@+id/closeIconId"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="30dp"
+            android:background="@drawable/close_icon"
+            />
+
+        <ImageButton
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_toLeftOf="@+id/closeIconId"
+            android:layout_alignParentTop="true"
+            android:id="@+id/read_DeleteButtonid"
+            android:background="@drawable/delete_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

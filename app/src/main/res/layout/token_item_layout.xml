@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_marginBottom="15dp"
+    android:elevation="10dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginRight="10dp"
+            android:id="@+id/token_SerialTextViewid"
+            android:layout_centerVertical="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle_bg"
+            android:textColor="#fff"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:paddingTop="12dp"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/token_SerialTextViewid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/token_TokenTextViewid"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="UserName"
+                android:textIsSelectable="true"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/token_ToUserName"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="UserName"
+                android:textIsSelectable="true"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/token_fromAgentName"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="Agent Name"
+                android:textIsSelectable="true"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/token_StatusTextViewid"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="status"
+                android:textIsSelectable="true"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/token_DateTextViewid"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="date"
+                android:textIsSelectable="true"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

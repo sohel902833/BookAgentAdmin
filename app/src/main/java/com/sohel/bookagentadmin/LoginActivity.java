@@ -74,7 +74,8 @@ public class LoginActivity extends AppCompatActivity {
        if(userType.equals("admin")){
            sendUserToAdminMainActivity();
        }else if(userType.equals("agent")){
-           checkAgent(userShared.getUserPhone(),userShared.getUserPassword());
+           sendUserToAgentMainActivity();
+           //checkAgent(userShared.getUserPhone(),userShared.getUserPassword());
        }
 
     }
@@ -129,8 +130,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendUserToAgentMainActivity() {
-        Toasty.success(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT, true).show();
-        startActivity(new Intent(LoginActivity.this, AgentMainActivity.class));
+       startActivity(new Intent(LoginActivity.this, AgentMainActivity.class));
         finish();
     }
 

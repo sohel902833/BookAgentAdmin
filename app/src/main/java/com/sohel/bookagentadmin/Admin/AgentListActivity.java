@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sohel.bookagentadmin.Admin.Adapter.AgentAdapter;
 import com.sohel.bookagentadmin.Admin.Model.Agent;
 import com.sohel.bookagentadmin.Admin.Model.BookCategory;
+import com.sohel.bookagentadmin.Agent.Model.AccessToken;
 import com.sohel.bookagentadmin.R;
 
 import java.util.ArrayList;
@@ -68,7 +69,11 @@ public class AgentListActivity extends AppCompatActivity {
         agentAdapter.setOnItemClickListner(new AgentAdapter.OnItemClickListner() {
             @Override
             public void onItemClick(int position) {
-
+                Agent ag=agentList.get(position);
+                Intent intent=new Intent(AgentListActivity.this,AdminUserProfileActivity.class);
+                intent.putExtra("userType","Agent");
+                intent.putExtra("userId",ag.getuID());
+                startActivity(intent);
             }
 
             @Override

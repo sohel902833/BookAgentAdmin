@@ -1,5 +1,7 @@
 package com.sohel.bookagentadmin.Admin.Adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jsibbold.zoomage.ZoomageView;
+import com.sohel.bookagentadmin.Admin.BooksReadActivity;
 import com.sohel.bookagentadmin.Admin.Model.BookCategory;
 import com.sohel.bookagentadmin.Admin.Model.ImageModel;
 import com.sohel.bookagentadmin.Admin.Model.ImageModel2;
@@ -24,14 +28,16 @@ import java.util.List;
 
 public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.MyViewHolder>{
 
-    private Context context;
+    private Activity context;
     private List<ImageModel2> imageModelList;
     private  OnItemClickListner listner;
     private  String checker="null";
+    private String type;
 
-    public ReadBookAdapter(Context context, List<ImageModel2> imageModelList) {
+    public ReadBookAdapter(Activity context, List<ImageModel2> imageModelList,String type) {
         this.context = context;
         this.imageModelList = imageModelList;
+        this.type=type;
     }
 
 
@@ -47,41 +53,33 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ImageModel2 currentItem=imageModelList.get(position);
 
-        Picasso.get().load(currentItem.getImageUrl()).placeholder(R.drawable.select_image).into(holder.imageView);
 
-        if(listner!=null){
-            if(position!= RecyclerView.NO_POSITION){
-                listner.currentItem(position);
-            }
+
+        holder.imageView.setVisibility(View.GONE);
+        holder.imageView2.setVisibility(View.GONE);
+        if(type.equals("grid")){
+            holder.imageView2.setVisibility(View.VISIBLE);
+            Picasso.get().load(currentItem.getImageUrl()).placeholder(R.drawable.select_image).into(holder.imageView2);
+        }else{
+            holder.imageView.setVisibility(View.VISIBLE);
+            Picasso.get().load(currentItem.getImageUrl()).placeholder(R.drawable.select_image).into(holder.imageView);
+
         }
-        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listner!=null){
-                    if(position!= RecyclerView.NO_POSITION){
-                        listner.onDelete(position);
-                    }
-                }
-            }
-        });
-
+        Picasso.get().load(currentItem.getImageUrl()).placeholder(R.drawable.select_image).into(holder.imageView);
     }
-
     @Override
     public int getItemCount() {
         return imageModelList.size();
     }
 
     public class MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView imageView;
-        ImageButton deleteButton;
+        ZoomageView imageView;
+        ImageView imageView2;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView=itemView.findViewById(R.id.read_ImageViewid);
-            deleteButton=itemView.findViewById(R.id.read_DeleteButtonid);
-
-
+            imageView2=itemView.findViewById(R.id.read_ImageViewid2);
 
             itemView.setOnClickListener(this);
 
@@ -103,8 +101,6 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.MyView
     }
     public interface  OnItemClickListner{
         void onItemClick(int position);
-        void onDelete(int position);
-        void currentItem(int position);
     }
 
     public void setOnItemClickListner(OnItemClickListner listner){

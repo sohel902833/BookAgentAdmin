@@ -39,7 +39,7 @@ import es.dmoral.toasty.Toasty;
 
 public class CreateAgentActivity extends AppCompatActivity {
 
-    private EditText nameEdittext,phoneEditText,passwordEdittext;
+    private EditText nameEdittext,phoneEditText,passwordEdittext,cointEt;
     private ProgressBar progressBar;
     private Button agentCreateButton;
 
@@ -49,7 +49,7 @@ public class CreateAgentActivity extends AppCompatActivity {
 
     //
     private Uri imageUri;
-    private DatabaseReference agentRef;
+    private DatabaseReference agentRef,coinRef,adminRef;
     private StorageReference storageReference;
 
     String comeFor,pAgentId="";
@@ -65,9 +65,11 @@ public class CreateAgentActivity extends AppCompatActivity {
         }
 
 
+        adminRef= FirebaseDatabase.getInstance().getReference().child("Admin");
 
         agentRef= FirebaseDatabase.getInstance().getReference().child("Admin").child("AgentList");
         storageReference= FirebaseStorage.getInstance().getReference().child("ProjectImage");
+        coinRef= FirebaseDatabase.getInstance().getReference("AgentCoins");
 
 
 
@@ -75,6 +77,7 @@ public class CreateAgentActivity extends AppCompatActivity {
         nameEdittext=findViewById(R.id.nameEt);
         phoneEditText=findViewById(R.id.phoneEt);
         passwordEdittext=findViewById(R.id.passwordEt);
+        cointEt=findViewById(R.id.cointEt);
 
         progressBar=findViewById(R.id.progressBar);
         agentCreateButton=findViewById(R.id.createAgentButton);
@@ -82,14 +85,16 @@ public class CreateAgentActivity extends AppCompatActivity {
 
         if(comeFor.equals("update")){
             loadAgentData();
+            cointEt.setVisibility(View.GONE);
         }
 
         agentCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                String name=nameEdittext.getText().toString();
-               String phone=phoneEditText.getText().toString();
-               String password=passwordEdittext.getText().toString();
+               String phone=phoneEditText.getText().toString().trim();
+               String password=passwordEdittext.getText().toString().trim();
+               String coin=cointEt.getText().toString().trim();
                if(name.isEmpty()){
                    showError(nameEdittext,"Name is Required");
                }else if(phone.isEmpty()){
@@ -97,16 +102,21 @@ public class CreateAgentActivity extends AppCompatActivity {
                }else if(password.isEmpty()){
                    showError(passwordEdittext,"Please Setup A Password for your Agent");
                }else{
-                   if(imageUri==null){
-                       if(comeFor.equals("update")){
-                           createAgent(phone,name,password,agent.getProfileImage());
+                   coin=coin.isEmpty()?"0":coin;
+                   int icoin=Integer.parseInt(coin);
+                   if(icoin==0){
+                       if(imageUri==null){
+                           if(comeFor.equals("update")){
+                               createAgent(phone,name,password,icoin,agent.getProfileImage());
+                           }else{
+                               createAgent(phone,name,password,icoin,"none");
+                           }
                        }else{
-                           createAgent(phone,name,password,"none");
+                           uploadImage(name,phone,icoin,password);
                        }
                    }else{
-                       uploadImage(name,phone,password);
+                       checkAdminBalance(icoin,name,phone,password);
                    }
-
                }
 
 
@@ -124,6 +134,51 @@ public class CreateAgentActivity extends AppCompatActivity {
 
     }
 
+    private void checkAdminBalance(int entierBalance,String name,String phone,String password) {
+        progressBar.setVisibility(View.VISIBLE);
+        adminRef.child("Profile")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            if(snapshot.hasChild("accountBalance")){
+                                int adminBalance=snapshot.child("accountBalance").getValue(Integer.class);
+                                if(adminBalance<entierBalance){
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(CreateAgentActivity.this, "You don't Have Enough Balance", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    if(imageUri==null){
+                                        if(comeFor.equals("update")){
+                                            createAgent(phone,name,password,entierBalance,agent.getProfileImage());
+                                        }else{
+                                            createAgent(phone,name,password,entierBalance,"none");
+                                        }
+                                    }else{
+                                        uploadImage(name,phone,entierBalance,password);
+                                    }
+
+                                }
+                            }
+                        }else{
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(CreateAgentActivity.this, "You Don't Have Enough Balance", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+
+
+
+
+
+
     private void loadAgentData() {
         agentRef.child(pAgentId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -131,12 +186,34 @@ public class CreateAgentActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                              agent=snapshot.getValue(Agent.class);
+                            // getAgentCoin(agent.getuID());
                             Picasso.get().load(agent.getProfileImage()).placeholder(R.drawable.profile)
                                     .into(profileImage);
                             nameEdittext.setText(agent.getName());
                             phoneEditText.setText(agent.getPhone());
                             passwordEdittext.setText(agent.getPassword());
                             agentCreateButton.setText("Update Agent");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+    private void getAgentCoin(String agentId) {
+
+        coinRef.child(agentId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            int coin=snapshot.child("coins").getValue(Integer.class);
+
+
+                            cointEt.setText(""+coin);
+
                         }
                     }
 
@@ -166,16 +243,14 @@ public class CreateAgentActivity extends AppCompatActivity {
         MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
         return  mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageuri));
     }
-
     private void openfilechooser() {
         Intent intentf=new Intent();
         intentf.setType("image/*");
         intentf.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intentf,1);
     }
-    private void uploadImage(String name,String phone,String password) {
+    private void uploadImage(String name,String phone,int coin,String password) {
         progressBar.setVisibility(View.VISIBLE);
-
         String key=agentRef.push().getKey();
 
         StorageReference filePath=storageReference.child(key+agentRef.push().getKey()+"."+getFileExtension(imageUri));
@@ -183,11 +258,12 @@ public class CreateAgentActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+
                 Task<Uri> urlTask=taskSnapshot.getStorage().getDownloadUrl();
                 while(!urlTask.isSuccessful());
                 Uri downloaduri=urlTask.getResult();
 
-               createAgent(phone,name,password,downloaduri.toString());
+               createAgent(phone,name,password,coin,downloaduri.toString());
 
 
             }
@@ -196,7 +272,7 @@ public class CreateAgentActivity extends AppCompatActivity {
 
     }
 
-    private void createAgent(String phone, String name, String password,String image) {
+    private void createAgent(String phone, String name, String password,int coin,String image) {
 
         if(comeFor.equals("update")){
             HashMap<String,Object> updateAgentMap=new HashMap<>();
@@ -211,17 +287,20 @@ public class CreateAgentActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toasty.success(CreateAgentActivity.this, "Agent Updated", Toast.LENGTH_SHORT, true).show();
-                                sendUserToAgentListActivity();
+                              if(coin==0){
+                                  Toasty.success(CreateAgentActivity.this, "Agent Updated", Toast.LENGTH_SHORT, true).show();
+                                  sendUserToAgentListActivity();
+                                  finish();
+                              }else{
+                                 addBalanceToAgent(coin,agent.getuID());
+                              }
                             } else {
                                 Toasty.error(CreateAgentActivity.this, "Something Problem: " + task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
-
                             }
                         }
                     });
 
         }else {
-
             String agentId = agentRef.push().getKey() + System.currentTimeMillis();
             Agent ag = new Agent(agentId, name, phone, password, image);
             agentRef.child(agentId)
@@ -230,8 +309,16 @@ public class CreateAgentActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toasty.success(CreateAgentActivity.this, "Agent Created", Toast.LENGTH_SHORT, true).show();
-                                sendUserToAgentListActivity();
+
+                                if(coin==0){
+                                    Toasty.success(CreateAgentActivity.this, "Agent Created", Toast.LENGTH_SHORT, true).show();
+                                    sendUserToAgentListActivity();
+                                    finish();
+                                }else{
+                                    addBalanceToAgent(coin,agentId);
+                                }
+
+
                             } else {
                                 Toasty.error(CreateAgentActivity.this, "Something Problem: " + task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
 
@@ -240,6 +327,32 @@ public class CreateAgentActivity extends AppCompatActivity {
                     });
         }
     }
+
+
+    private void addBalanceToAgent(int coin,String agentId) {
+
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("coins",coin);
+
+        coinRef.child(agentId)
+                .updateChildren(hashMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toasty.success(CreateAgentActivity.this, "Agent Updated", Toast.LENGTH_SHORT, true).show();
+                            sendUserToAgentListActivity();
+                            finish();
+                           progressBar.setVisibility(View.GONE);
+                       }else{
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(CreateAgentActivity.this, "Error: "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
 
     private void sendUserToAgentListActivity() {
         startActivity(new Intent(CreateAgentActivity.this,AgentListActivity.class));

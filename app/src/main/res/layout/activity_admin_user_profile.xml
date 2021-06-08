@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminUserProfileActivity">
+    <include
+        layout="@layout/app_ber_layout"
+        android:id="@+id/u_a_AppBarid"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/u_a_CoinTv"
+        android:layout_below="@+id/u_a_AppBarid"
+        android:layout_margin="15dp"
+        android:text="0"
+        android:textSize="28sp"
+        android:textColor="#000"
+        android:textAlignment="textEnd"
+        android:drawableRight="@drawable/ic_coins"
+        android:drawablePadding="8dp"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_below="@+id/u_a_CoinTv"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:civ_border_color="#000"
+        app:civ_border_width="2dp"
+        android:src="@drawable/profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/u_a_ProfileImageViewid"
+        />
+    <LinearLayout
+        android:id="@+id/pl1"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/u_a_ProfileImageViewid"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:padding="10dp"
+            android:background="@drawable/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/u_a_emailTextViewid"
+            android:text="email@gmail.com"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/u_a_UserNameTv"
+           android:textSize="18sp"
+            android:text="Name "
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/u_a_userPhoneTv"
+            android:text="Phone"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/pl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:drawablePadding="10dp"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:id="@+id/u_a_CopyHeaderTv"
+        android:layout_marginLeft="20dp"
+        android:text="Tap to copy your profile ID"
+        />
+
+    <TextView
+        android:layout_below="@+id/u_a_CopyHeaderTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_margin="20dp"
+        android:drawableLeft="@drawable/copy_icon"
+        android:drawablePadding="10dp"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:id="@+id/u_a_UIDTextViewid"
+
+        />
+
+</RelativeLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Agent.AgentSendMoneyActivity">
+
+
+    <include
+        layout="@layout/app_ber_layout"
+        android:id="@+id/ag_sendBalanceAppBarid"
+        />
+
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_below="@+id/ag_sendBalanceAppBarid"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt1"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Send Balance"
+            android:textAlignment="center"
+            />
+
+        <EditText
+            android:id="@+id/ag_agentIdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:padding="15dp"
+            android:hint="Enter Agent Id"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="50dp"
+            />
+
+        <Button
+            android:id="@+id/ag_agentSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input"
+            android:layout_gravity="center_horizontal"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:minWidth="120dp"
+            />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/ag_agentnameTextViewid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Agent Name"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textIsSelectable="true"
+            />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/ag_agentPhoneTextViewid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Agent Name"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:textIsSelectable="true"
+            />
+
+        <EditText
+            android:visibility="gone"
+            android:id="@+id/ag_balanceAmountEditext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:padding="15dp"
+            android:hint="Enter Amount"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/ag_sendBalanceButtonid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input"
+            android:layout_gravity="center_horizontal"
+            android:text="Send Balance"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:minWidth="120dp"
+            />
+
+    </LinearLayout>
+</RelativeLayout>

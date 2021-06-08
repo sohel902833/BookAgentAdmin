@@ -1,5 +1,6 @@
 package com.sohel.bookagentadmin.Agent.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.sohel.bookagentadmin.Admin.Model.ChatData;
 import com.sohel.bookagentadmin.Agent.Model.MessageModel;
+import com.sohel.bookagentadmin.LocalDatabase.UserShared;
 import com.sohel.bookagentadmin.R;
 import com.squareup.picasso.Picasso;
 
@@ -25,14 +28,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     private FirebaseAuth mAuth;
     private  int counter=1;
     private DatabaseReference databaseReference;
-    private Context context;
-    private List<MessageModel> dataList=new ArrayList<>();
-    String mImage;
-
-    public ChatAdapter(Context context, List<MessageModel> dataList, String image) {
+    private Activity context;
+    private List<ChatData> dataList=new ArrayList<>();
+     UserShared userShared;
+    public ChatAdapter(Activity context, List<ChatData> dataList) {
         this.context = context;
         this.dataList = dataList;
-        this.mImage=image;
+
+        userShared=new UserShared(context);
     }
 
     @NonNull
@@ -50,12 +53,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
 
 
-        final MessageModel selecteditem=dataList.get(position);
+        final ChatData selecteditem=dataList.get(position);
         String fromUserid=selecteditem.getFrom();
-        String messageSenderId=mAuth.getCurrentUser().getUid();
+        String messageSenderId=userShared.getUID();
         String messageType=selecteditem.getType();
 
-        Picasso.get().load(mImage).placeholder(R.drawable.profile).into(holder.reciverProfileImage);
+        Picasso.get().load("Rsdkdjdkf").placeholder(R.drawable.profile).into(holder.reciverProfileImage);
 
         holder.receiverMessageTExt.setVisibility(View.GONE);
         holder.reciverProfileImage.setVisibility(View.GONE);
@@ -66,7 +69,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         holder.senderMessageTime.setVisibility(View.GONE);
 
         if(messageType.equals("text")){
-
           if(fromUserid.equals(messageSenderId)){
                     holder.senderMessageTExt.setVisibility(View.VISIBLE);
                     holder.senderMessageTExt.setBackgroundResource(R.drawable.sender_messages_layout);

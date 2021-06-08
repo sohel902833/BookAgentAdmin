@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookAgentAdmin">
-        <activity android:name=".Admin.GenerateTokenActivity"></activity>
+        <activity android:name=".Admin.UpdateBookActivity"></activity>
+        <activity android:name=".Agent.AgentSendMoneyActivity" />
+        <activity android:name=".Admin.AdminUserProfileActivity" />
+        <activity android:name=".Admin.TotalSellActivity" />
+        <activity android:name=".Admin.TokenHistoryActivity" />
+        <activity android:name=".Admin.SendMoneyDetailsActivity" />
+        <activity android:name=".Admin.SendBalanceActivity" />
+        <activity android:name=".Admin.BalanceStatementActivity" />
+        <activity android:name=".Admin.GenerateTokenActivity" />
         <activity android:name=".Agent.AgentMainActivity" />
         <activity android:name=".Admin.AgentListActivity" />
         <activity android:name=".Admin.CreateAgentActivity" />
@@ -21,12 +29,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Agent.UserListActivity" />
-        <activity android:name=".Agent.ChatingActivity" />
+        <activity
+            android:name=".Agent.ChatingActivity"
+            android:parentActivityName=".Agent.UserListActivity" />
         <activity android:name=".Admin.BooksReadActivity" />
         <activity android:name=".Admin.BookListActivity" />
         <activity android:name=".Admin.BookCategoryActivity" />
         <activity android:name=".Admin.BooksCreateActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

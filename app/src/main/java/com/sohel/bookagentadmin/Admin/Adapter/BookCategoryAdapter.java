@@ -1,6 +1,7 @@
 package com.sohel.bookagentadmin.Admin.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,7 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.sohel.bookagentadmin.Admin.BookCategoryActivity;
+import com.sohel.bookagentadmin.Admin.BookListActivity;
 import com.sohel.bookagentadmin.Admin.Model.BookCategory;
+import com.sohel.bookagentadmin.Admin.Model.TimeDateModel;
 import com.sohel.bookagentadmin.R;
 import com.squareup.picasso.Picasso;
 
@@ -23,15 +27,15 @@ import java.util.List;
 public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapter.MyViewHolder>{
 
     private Context context;
-    private List<BookCategory> categoryList;
+    private List<TimeDateModel> categoryList;
     private  OnItemClickListner listner;
-    private  String checker="null";
+    int year;
 
-    public BookCategoryAdapter(Context context, List<BookCategory> categoryList) {
+    public BookCategoryAdapter(Context context, List<TimeDateModel> categoryList,int year) {
         this.context = context;
         this.categoryList = categoryList;
+        this.year=year;
     }
-
 
     @NonNull
     @Override
@@ -43,54 +47,38 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        BookCategory currentItem=categoryList.get(position);
+        TimeDateModel currentItem=categoryList.get(position);
+        holder.textView.setText(currentItem.getDate()+"/"+currentItem.getMonth()+"/"+year);
 
-        holder.textView.setText(currentItem.getCategoryName());
-        Picasso.get().load(currentItem.getImage()).placeholder(R.drawable.select_image).into(holder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent=new Intent(context, BookListActivity.class);
+                intent.putExtra("day",currentItem.getDate());
+                intent.putExtra("month",currentItem.getMonth());
+                intent.putExtra("year",year);
+                context.startActivity(intent);
+            }
+        });
 
     }
-
     @Override
     public int getItemCount() {
         return categoryList.size();
     }
 
-    public class MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener{
-        ImageView imageView;
+    public class MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
         TextView textView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-             imageView=itemView.findViewById(R.id.admin_main_categoryImageView);
              textView=itemView.findViewById(R.id.admin_main_TextViewid);
 
             itemView.setOnClickListener(this);
-              itemView.setOnCreateContextMenuListener(this);
-
-
 
         }
 
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            if(listner!=null){
-                int position=getAdapterPosition();
-                if(position!= RecyclerView.NO_POSITION){
-                    switch (item.getItemId()){
-                        case 1:{
-                            listner.onDelete(position);
-                            return  true;
-                        }
-                        case 2:{
-                            listner.onUpdate(position);
-                            return  true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
 
         @Override
         public void onClick(View v) {
@@ -101,22 +89,9 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
                 }
             }
         }
-
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            if(!checker.equals("noMenu")){
-                menu.setHeaderTitle("choose an action");
-                MenuItem delete=menu.add(Menu.NONE,1,1,"Delete Category");
-                MenuItem update=menu.add(Menu.NONE,2,2,"Update Category");
-                delete.setOnMenuItemClickListener(this);
-                update.setOnMenuItemClickListener(this);
-            }
-        }
     }
     public interface  OnItemClickListner{
         void onItemClick(int position);
-        void onDelete(int position);
-        void onUpdate(int position);
     }
 
     public void setOnItemClickListner(OnItemClickListner listner){

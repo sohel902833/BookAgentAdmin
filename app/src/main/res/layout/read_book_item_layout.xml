@@ -2,27 +2,25 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <ImageView
+    <com.jsibbold.zoomage.ZoomageView
+        android:visibility="gone"
+        android:layout_margin="10dp"
         android:id="@+id/read_ImageViewid"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000"
+        />
+    <ImageView
+        android:src="@drawable/profile"
+        android:layout_margin="10dp"
+        android:id="@+id/read_ImageViewid2"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         />
 
-    <ImageButton
-        android:id="@+id/read_DeleteButtonid"
-        android:backgroundTint="#fff"
-        android:background="@drawable/delete_icon"
-        android:layout_margin="25dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-
-        />
 
 
 </RelativeLayout>

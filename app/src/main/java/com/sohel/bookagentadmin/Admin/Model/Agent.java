@@ -3,16 +3,15 @@ package com.sohel.bookagentadmin.Admin.Model;
 public class Agent {
     String uID,name,phone,password,profileImage;
 
-
     public Agent() {
     }
 
-    public Agent(String uID, String name, String phone, String password,String profileImage) {
+    public Agent(String uID, String name, String phone, String password, String profileImage) {
         this.uID = uID;
         this.name = name;
         this.phone = phone;
         this.password = password;
-        this.profileImage=profileImage;
+        this.profileImage = profileImage;
     }
 
     public String getuID() {

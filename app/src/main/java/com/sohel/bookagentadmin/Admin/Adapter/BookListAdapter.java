@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sohel.bookagentadmin.Admin.Model.BookCategory;
 import com.sohel.bookagentadmin.Admin.Model.BookModel;
+import com.sohel.bookagentadmin.Admin.Model.ImageModel;
 import com.sohel.bookagentadmin.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyViewHolder>{
 
@@ -26,7 +29,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyView
     private List<BookModel> bookList;
     private  OnItemClickListner listner;
     private  String checker="null";
-
     public BookListAdapter(Context context, List<BookModel> bookList) {
         this.context = context;
         this.bookList = bookList;
@@ -37,16 +39,20 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view=LayoutInflater.from(context).inflate(R.layout.category_item_list,parent,false);
+        View view=LayoutInflater.from(context).inflate(R.layout.book_list_item_layout,parent,false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        String img="none";
         BookModel currentItem=bookList.get(position);
-
         holder.textView.setText(currentItem.getBookName());
-        Picasso.get().load(currentItem.getImageList().get(0).getImageUrl()).placeholder(R.drawable.select_image).into(holder.imageView);
+              if(currentItem.getImageList()!=null) {
+                  img = currentItem.getImageList().get(0) == null ? "none" : currentItem.getImageList().get(0).getImageUrl();
+              }
+              Picasso.get().load(img).placeholder(R.drawable.select_image)
+                      .into(holder.imageView);
 
     }
 
@@ -103,13 +109,11 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyView
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            if(!checker.equals("noMenu")){
                 menu.setHeaderTitle("choose an action");
                 MenuItem delete=menu.add(Menu.NONE,1,1,"Delete Book");
                 MenuItem update=menu.add(Menu.NONE,2,2,"Update Book");
                 delete.setOnMenuItemClickListener(this);
                 update.setOnMenuItemClickListener(this);
-            }
         }
     }
     public interface  OnItemClickListner{

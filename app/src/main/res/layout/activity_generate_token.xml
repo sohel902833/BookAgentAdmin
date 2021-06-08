@@ -13,6 +13,7 @@
         />
 
     <LinearLayout
+        android:gravity="center"
         android:padding="15dp"
         android:layout_below="@+id/generate_token_AppBarid"
         android:orientation="vertical"
@@ -25,15 +26,39 @@
         android:id="@+id/txt1"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Generate New Token:"
+        android:text="Generate New Token"
+        android:textAlignment="center"
         />
+        <!--    <TextView
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt11"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:text="Token Limit Time"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+            />
 
-    <Spinner
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/selectDateSpinnerId"
-        />
+        <Spinner
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/selectDateSpinnerId"
+            />-->
+
+        <EditText
+            android:id="@+id/userIdEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:padding="15dp"
+            android:hint="Enter User Id"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="50dp"
+            />
+
      <Button
          android:id="@+id/keyGenerateButton"
          android:layout_width="wrap_content"
@@ -52,12 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:textAlignment="center"
-            android:text="Text here"
-            android:textSize="16sp"
+            android:text=""
+            android:textSize="28sp"
             android:textColor="#000"
-
+            android:textIsSelectable="true"
             />
-
-
     </LinearLayout>
 </RelativeLayout>

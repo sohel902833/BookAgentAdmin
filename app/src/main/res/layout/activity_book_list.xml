@@ -20,15 +20,4 @@
         android:id="@+id/bookListRecyclerViewid"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addBookButtonid"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="25dp"
-        android:src="@drawable/add_icon"
-        android:backgroundTint="@color/purple_500"
-        />
-
 </RelativeLayout>

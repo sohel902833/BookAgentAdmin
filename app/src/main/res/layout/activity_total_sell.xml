@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.TotalSellActivity">
+
+    <include
+        layout="@layout/app_ber_layout"
+        android:id="@+id/sellAppBArid"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="25dp"
+        android:layout_below="@+id/sellAppBArid"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="15dp"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="320dp">
+
+        <LinearLayout
+
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Sell"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:id="@+id/txt1"
+                />
+            <TextView
+                android:textAlignment="center"
+                android:textColor="#4CAF50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="25sp"
+                android:layout_marginBottom="15dp"
+                android:textStyle="bold"
+                android:id="@+id/sell_BalanceTextViewid"
+                />
+            <TextView
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="From Date"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:id="@+id/sell_FromDateTextViewid"
+                />
+            <TextView
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To Date"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:id="@+id/sell_ToDateTextViewid"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>
